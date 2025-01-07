@@ -10,6 +10,9 @@ on:
       - 'staging'
       - 'feature/**'
 
+permissions:
+  id-token: write
+
 # what exactly git should to run
 jobs: 
   deploy:
