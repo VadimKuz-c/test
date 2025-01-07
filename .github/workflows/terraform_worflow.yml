@@ -23,6 +23,13 @@ jobs:
       # raplaces all above:
     - name: Clone repo
       uses: actions/checkout@v3
+
+    - name: Assuming the role for gha-runner
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-1
+        role-to-assume: arn:aws:iam::021891614876:role/gha-runners-demo-role
+        role-session-name: MySessionName
       
     - name: Terraform deploy
       working-directory: root-terraform-git-module/
