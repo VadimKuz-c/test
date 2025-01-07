@@ -28,7 +28,7 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v3
 
-- name: Setup Terraform
+    - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: v1.9.7
