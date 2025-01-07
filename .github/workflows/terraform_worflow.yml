@@ -12,6 +12,7 @@ on:
 
 permissions:
   id-token: write
+  contents: read
 
 # what exactly git should to run
 jobs: 
@@ -27,6 +28,11 @@ jobs:
     - name: Clone repo
       uses: actions/checkout@v3
 
+- name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: v1.9.7
+
     - name: Assuming the role for gha-runner
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -35,7 +41,7 @@ jobs:
         role-session-name: MySessionName
       
     - name: Terraform deploy
-      working-directory: root-terraform-git-module/
+      working-directory: root-terraform-git-module
       run: |
         terraform init
         terraform plan 
