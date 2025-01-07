@@ -1,0 +1,32 @@
+name: Terraform Deploy
+
+# trigger when workflow should start
+on: 
+  # automated trigger, mostly it's going to be "git push" or merge PR, whenever change
+  # happens on one of these branches:
+  push:
+    branches:
+      - 'main'
+      - 'staging'
+      - 'feature/**'
+
+# what exactly git should to run
+jobs: 
+  deploy:
+    # where the job should run
+    runs-on: ubuntu-latest
+
+    steps:
+      # run: |
+      #   git clone git@github.com:VadimKuz-c/test.git
+
+      # raplaces all above:
+    - name: Clone repo
+      uses: actions/checkout@v3
+      
+    - name: Terraform deploy
+      working-directory: root-terraform-git-module/
+      run: |
+        terraform init
+        terraform plan 
+        terraform apply
